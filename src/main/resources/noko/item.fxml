@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#itemClick" prefHeight="200.0" prefWidth="150.0" styleClass="item-transparant" stylesheets="@value/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="noko.ItemController">
+   <children>
+      <VBox prefHeight="200.0" prefWidth="150.0" styleClass="item-rounded" stylesheets="@value/style.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="150.0" prefWidth="150.0">
+               <children>
+                  <ImageView fx:id="itemImage" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" styleClass="shadow">
+                     <image>
+                        <Image url="@icon/add_image_ic.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="141.0">
+               <children>
+                  <Label fx:id="namaBarangLbl" text="Nama Barang">
+                     <font>
+                        <Font name="SansSerif Regular" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="141.0">
+               <children>
+                  <Label fx:id="hargaBarangLbl" text="Rp 15000000">
+                     <font>
+                        <Font name="SansSerif Bold" size="11.0" />
+                     </font>
+                  </Label>
+                  <HBox prefWidth="40.0" HBox.hgrow="ALWAYS" />
+                  <Label fx:id="soldLbl" text="SOLD">
+                     <font>
+                        <Font name="SansSerif Bold" size="12.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

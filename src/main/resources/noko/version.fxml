@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="450.0" styleClass="version-background" stylesheets="@value/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="noko.VersionController">
+   <children>
+      <Label fx:id="versionLabel" layoutX="52.0" layoutY="36.0" text="v1.2.0" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Bold" size="24.0" />
+         </font>
+      </Label>
+      <GridPane layoutX="52.0" layoutY="89.0" prefHeight="100.0" prefWidth="350.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label fx:id="authorLbl" text="Author: " textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="nimLbl" text="NIM: " textFill="WHITE" GridPane.rowIndex="1">
+               <font>
+                  <Font name="SansSerif Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="assignmentLbl" text="Assignment: " textFill="WHITE" GridPane.rowIndex="2">
+               <font>
+                  <Font name="SansSerif Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="projactLbl" layoutX="10.0" layoutY="14.0" text="Project Name: " textFill="WHITE" GridPane.rowIndex="3">
+               <font>
+                  <Font name="SansSerif Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <Button layoutX="107.0" layoutY="222.0" mnemonicParsing="false" onMouseClicked="#okayClicked" prefHeight="45.0" prefWidth="236.0" styleClass="version-okaybtn" stylesheets="@value/style.css" text="Okay" textFill="WHITE">
+         <font>
+            <Font name="SansSerif Bold" size="23.0" />
+         </font>
+      </Button>
+      <HBox fx:id="topBar" layoutX="2.0" prefHeight="66.0" prefWidth="450.0" />
+      <Button layoutX="392.0" layoutY="18.0" mnemonicParsing="false" onMouseClicked="#okayClicked" styleClass="close-btn-version" stylesheets="@value/style.css" text="✖">
+         <font>
+            <Font name="SansSerif Bold" size="19.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

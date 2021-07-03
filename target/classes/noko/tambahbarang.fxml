@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="670.0" prefWidth="1080.0" styleClass="confirm-background" stylesheets="@value/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="noko.TambahBarangController">
+   <children>
+      <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="600.0" styleClass="top-bar-menu" stylesheets="@value/style.css">
+         <children>
+            <Label fx:id="titleMenu" text="Tambah Barang">
+               <font>
+                  <Font name="SansSerif Bold" size="36.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Button fx:id="closeBtn" focusTraversable="false" mnemonicParsing="false" styleClass="button-close-reg" stylesheets="@value/style.css" text="✖">
+               <font>
+                  <Font name="SansSerif Bold" size="19.0" />
+               </font>
+            </Button>
+         </children>
+         <VBox.margin>
+            <Insets left="20.0" right="20.0" />
+         </VBox.margin>
+      </HBox>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="100.0">
+         <children>
+            <HBox alignment="CENTER">
+               <children>
+                  <GridPane>
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.60003662109375" minWidth="10.0" prefWidth="214.066650390625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="542.6000061035156" minWidth="10.0" prefWidth="531.933349609375" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="202.0" minHeight="-Infinity" prefHeight="202.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="109.60003662109375" minHeight="10.0" prefHeight="84.0" vgrow="SOMETIMES" />
+                     </rowConstraints>
+                     <children>
+                        <HBox alignment="CENTER_LEFT">
+                           <children>
+                              <Label text="Nama Barang">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="24.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" GridPane.rowIndex="1">
+                           <children>
+                              <Label text="Harga">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="24.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="168.0" GridPane.rowIndex="2">
+                           <children>
+                              <Label text="Jumlah">
+                                 <font>
+                                    <Font name="SansSerif Bold" size="24.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </HBox>
+                        <TextField fx:id="namaTfield" promptText="Nama" styleClass="textfield-login" stylesheets="@value/style.css" GridPane.columnIndex="1">
+                           <font>
+                              <Font name="SansSerif Bold" size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="hargaTfield" layoutX="383.0" layoutY="50.0" promptText="Harga" styleClass="textfield-login" stylesheets="@value/style.css" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="SansSerif Bold" size="20.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="jumlahTfield" layoutX="383.0" layoutY="50.0" promptText="Jumlah" styleClass="textfield-login" stylesheets="@value/style.css" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font name="SansSerif Bold" size="20.0" />
+                           </font>
+                        </TextField>
+                        <Label text="Gambar" GridPane.rowIndex="4">
+                           <font>
+                              <Font name="SansSerif Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <VBox alignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                           <children>
+                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="120.0" prefWidth="120.0">
+                                 <children>
+                                    <ImageView fx:id="displayImage" fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@icon/add_image_ic.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="532.0">
+                                 <children>
+                                    <TextField fx:id="pathTfield" prefHeight="39.0" prefWidth="436.0" promptText="Path" styleClass="textfield-login" stylesheets="@value/style.css">
+                                       <font>
+                                          <Font name="SansSerif Bold" size="20.0" />
+                                       </font>
+                                    </TextField>
+                                    <Button fx:id="uploadBtn" mnemonicParsing="false" styleClass="button-in-profile" stylesheets="@value/style.css" text="Upload">
+                                       <font>
+                                          <Font size="19.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                           <children>
+                              <Button fx:id="tambahkanBtn" layoutX="497.0" layoutY="32.0" mnemonicParsing="false" styleClass="button-in-profile" stylesheets="@value/style.css" text="Tambahkan">
+                                 <font>
+                                    <Font size="27.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <Button fx:id="cancelBtn" mnemonicParsing="false" styleClass="button-in-profile" stylesheets="@value/style.css" text="Batal" GridPane.rowIndex="5">
+                           <font>
+                              <Font size="27.0" />
+                           </font>
+                        </Button>
+                        <Label text="Kategori" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="SansSerif Bold" size="24.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="kategoriTfield" layoutX="224.0" layoutY="116.0" promptText="Kategori" styleClass="textfield-login" stylesheets="@value/style.css" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                           <font>
+                              <Font name="SansSerif Bold" size="20.0" />
+                           </font>
+                        </TextField>
+                     </children>
+                  </GridPane>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</VBox>

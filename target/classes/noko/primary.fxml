@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="noko.PrimaryController">
+   <top>
+      <HBox prefHeight="50.0" styleClass="purple-background" stylesheets="@value/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="50.0">
+               <children>
+                  <Label text="≡" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="30.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label layoutX="30.0" layoutY="20.0" text="Noko" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="28.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="25.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="topBar" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Label text="Wahyu Patriaji" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label text="202010370311197" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="16.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="20.0" />
+                     </HBox.margin>
+                  </Label>
+               </children></HBox>
+            <HBox prefHeight="50.0" prefWidth="180.0">
+               <children>
+                  <Button fx:id="minimizeBtn" mnemonicParsing="false" onMouseClicked="#minimizeClicked" prefHeight="41.0" prefWidth="60.0" styleClass="minimize-support-btn" stylesheets="@value/style.css" text="─" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="22.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="supportBtn" mnemonicParsing="false" onMouseClicked="#supportClicked" prefHeight="46.0" prefWidth="60.0" styleClass="minimize-support-btn" stylesheets="@value/style.css" text="⛶" textFill="WHITE">
+                     <font>
+                        <Font size="22.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="closeBtn" mnemonicParsing="false" onMouseClicked="#closeClicked" prefHeight="41.0" prefWidth="60.0" styleClass="close-btn" stylesheets="@value/style.css" text="✖" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="22.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
+         </children>
+      </HBox>
+   </top>
+   <left>
+      <VBox prefWidth="200.0" styleClass="purple-background" stylesheets="@value/style.css" BorderPane.alignment="CENTER">
+         <children>
+            <HBox fx:id="profileBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0" styleClass="button-menu" stylesheets="@value/style.css">
+               <children>
+                  <Label text="Profile" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="50.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox fx:id="marketBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0" styleClass="button-menu" stylesheets="@value/style.css">
+               <children>
+                  <Label text="Market" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="storeHouseBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0" styleClass="button-menu">
+               <children>
+                  <Label text="Storehouse" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox fx:id="anayticsBtn" alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0" styleClass="button-menu">
+               <children>
+                  <Label text="Analytics" textFill="WHITE">
+                     <font>
+                        <Font name="SansSerif Bold" size="24.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="30.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <BorderPane fx:id="menuPane" BorderPane.alignment="CENTER" />
+   </center>
+</BorderPane>
