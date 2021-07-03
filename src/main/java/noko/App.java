@@ -14,7 +14,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 /**
- * JavaFX App
+ * @author Wahyu Patriaji
+ * @version 1.5.1
  */
 public class App extends Application {
     public static void main(String[] args) {

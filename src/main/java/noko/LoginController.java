@@ -123,18 +123,18 @@ public class LoginController implements Initializable{
         passLoginTField.setVisible(false);
         showPass = false;
         showHiddenPass.setImage(showToggle);
-        replacePassField(passwordField, null);
+        replacePassField();
     }
 
-    private void replacePassField(PasswordField passwordField, TextField passLogin) {
+    private void replacePassField() {
         loginGridPane.getChildren().clear();
         loginGridPane.add(userHbox, 0, 0);
         loginGridPane.add(userLoginTField, 1, 0);
         loginGridPane.add(passHbox, 0, 1);
-        if (passwordField != null) {
-            loginGridPane.add(passwordField, 1, 1);
+        if (showPass) {
+            loginGridPane.add(passLoginTField, 1, 1);
         } else {
-            loginGridPane.add(passLogin, 1, 1);
+            loginGridPane.add(passwordField, 1, 1);
         }
         loginGridPane.add(showHiddenPass, 2, 1);
     }
@@ -161,13 +161,13 @@ public class LoginController implements Initializable{
                 showHiddenPass.setImage(showToggle);
                 passLoginTField.setVisible(false);
                 passwordField.setVisible(true);
-                replacePassField(passwordField, null);
+                replacePassField();
             } else {
                 showPass = true;
                 showHiddenPass.setImage(hiddenToggle);
                 passwordField.setVisible(false);
                 passLoginTField.setVisible(true);
-                replacePassField(null, passLoginTField);
+                replacePassField();
             }
         });
     }
@@ -283,8 +283,8 @@ public class LoginController implements Initializable{
                 if (user.equals(userLoginTField.getText()) || email.equals(userLoginTField.getText())) {
                     if (pass.equals(passLoginTField.getText())) {
                         succes = true;
+                        break;
                     }
-                    break;
                 }
                 userData = bufferedReader.readLine();
             }

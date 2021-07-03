@@ -103,6 +103,12 @@ public class TambahBarangController implements Initializable {
         jumlahTfield.setOnKeyPressed((event) -> {
             onlyIntegerEvent(event, jumlahTfield, kategoriTfield);
         });
+        namaTfield.setOnKeyPressed((event) -> {
+            normalTextField(namaTfield);
+        });
+        pathTfield.textProperty().addListener((observable, oldValue, newValue) ->{
+            normalTextField(pathTfield);
+        });
     }
 
     private void onlyIntegerEvent(KeyEvent event, TextField textField, TextField textField2) {

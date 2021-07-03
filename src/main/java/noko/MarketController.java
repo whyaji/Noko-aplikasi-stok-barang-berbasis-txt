@@ -248,9 +248,6 @@ public class MarketController implements Initializable {
                         items.get(i).setJumlah(items.get(i).getJumlah() - itemCart.getBanyak());
                     }
                 }
-                if (items.get(i).getUuidItem().equals(choosenItem.getUuidItem())) {
-                    setChoosenItem(items.get(i));
-                }
                 if (!scope.equals("")) {
                     if (!scope.equals("All")) {
                         boolean containInName = items.get(i).getNama().toLowerCase().contains(scope.toLowerCase());
@@ -260,9 +257,6 @@ public class MarketController implements Initializable {
                             continue;
                         }
                     }
-                }
-                if (items.get(i).getUuidItem().equals(choosenItem.getUuidItem())) {
-                    setChoosenItem(items.get(i));
                 }
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -281,7 +275,6 @@ public class MarketController implements Initializable {
 
                 gridPaneStore.add(anchorPane, column++, row);
                 GridPane.setMargin(anchorPane, new Insets(10));
-                
             }
         } catch (Exception e) {
         }

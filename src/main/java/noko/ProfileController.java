@@ -118,12 +118,16 @@ public class ProfileController implements Initializable {
         lastNameTfield.setText(account.getLastName());
         companyTfield.setText(account.getCompany());
 
+        passHidden();
+        joinedLbl.setText("Joined " + account.getJoinDate());
+    }
+
+    private void passHidden() {
         StringBuilder star = new StringBuilder();
         for (int i = 0; i < account.getPass().length(); i++) {
             star.append("*");
         }
         passTfield.setText(star.toString());
-        joinedLbl.setText("Joined " + account.getJoinDate());
     }
 
     private void setBtnVisible(boolean bool) {
@@ -141,9 +145,11 @@ public class ProfileController implements Initializable {
         });
         saveBtn.setOnMouseClicked((event) -> {
             saveEditProfile();
+            passHidden();
         });
         discardBtn.setOnMouseClicked((event) -> {
             discardEditProfile();
+            passHidden();
         });
     }
 
