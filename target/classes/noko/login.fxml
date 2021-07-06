@@ -187,7 +187,7 @@
                   <Font name="Arial Rounded MT Bold" size="17.0" />
                </font>
             </Button>
-            <Button fx:id="closeBtn" mnemonicParsing="false" onMouseClicked="#closeClicked" prefHeight="41.0" prefWidth="50.0" styleClass="close-btn" stylesheets="@value/style.css" text="✖" textFill="WHITE">
+            <Button fx:id="closeBtn" mnemonicParsing="false" onMouseClicked="#closeClicked" prefHeight="41.0" prefWidth="51.0" styleClass="close-btn" stylesheets="@value/style.css" text="✖" textFill="WHITE">
                <font>
                   <Font name="Arial Rounded MT Bold" size="22.0" />
                </font>
