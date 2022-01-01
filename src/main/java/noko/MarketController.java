@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -15,6 +16,7 @@ import java.util.UUID;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -23,6 +25,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -102,6 +105,9 @@ public class MarketController implements Initializable {
     @FXML
     private Label totalPembayaranLbl;
 
+    @FXML
+    private ChoiceBox<String> sortChoiceBox;
+
     static String customerUuid;
     static String customerName;
 
@@ -121,10 +127,22 @@ public class MarketController implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         totalPembayaranLbl.setText(totalPembayaranLbl.getText() + "(" + App.CURRENCY + ")");
+        setSortChoiceBox();
         setVisibleElemen(false);
         setUpKategori();
         setBtnHandler();
         scope = "";
+        dynamicGridPane();
+    }
+
+    private void setSortChoiceBox() {
+        String[] sortList = {"Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama"};
+        sortChoiceBox.getItems().setAll(sortList);
+        sortChoiceBox.setOnAction(this::getSort);
+        sortChoiceBox.getSelectionModel().selectFirst();
+    }
+
+    private void getSort(ActionEvent event){
         dynamicGridPane();
     }
 
@@ -219,6 +237,7 @@ public class MarketController implements Initializable {
     private void dynamicGridPane() {
         items.clear();
         items.addAll(getData());
+        sortItems(sortChoiceBox.getValue());
         if (confirmed) {
             setUpAllButtonKategori();
         }
@@ -279,6 +298,77 @@ public class MarketController implements Initializable {
         } catch (Exception e) {
         }
         confirmed = false;
+    }
+
+    private void sortItems(String value) {
+        switch (value) {//"Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama"
+            case "Terbaru":
+                sortTerbaru();
+                break;
+            case "Harga Terendah":
+                sortTerendah();
+                break;
+            case "Harga Tertinggi":
+                sortTertinggi();
+                break;
+            case "Nama":
+                sortNama();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void sortNama() {
+        int n = items.size();
+        for (int i = 0; i < n - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < n; j++) {
+                if (items.get(j).getNama().compareToIgnoreCase(items.get(min).getNama()) < 0) {
+                    min = j;
+                }
+            }
+            
+            Item temp = items.get(min);
+            items.set(min, items.get(i));
+            items.set(i, temp);
+        }
+    }
+
+    private void sortTertinggi() {
+        int n = items.size();
+        for (int i = 0; i < n - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < n; j++) {
+                if (items.get(j).getHarga() > items.get(min).getHarga()) {
+                    min = j;
+                }
+            }
+            
+            Item temp = items.get(min);
+            items.set(min, items.get(i));
+            items.set(i, temp);
+        }
+    }
+
+    private void sortTerendah() {
+        int n = items.size();
+        for (int i = 0; i < n - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < n; j++) {
+                if (items.get(j).getHarga() < items.get(min).getHarga()) {
+                    min = j;
+                }
+            }
+            
+            Item temp = items.get(min);
+            items.set(min, items.get(i));
+            items.set(i, temp);
+        }
+    }
+
+    private void sortTerbaru() {
+        Collections.reverse(items);
     }
 
     private List<Item> getData(){

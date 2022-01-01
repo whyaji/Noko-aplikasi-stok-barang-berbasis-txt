@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -48,6 +49,12 @@ public class PrimaryController implements Initializable {
     private BorderPane menuPane;
 
     @FXML
+    private Label labelNama;
+
+    @FXML
+    private Label labelNim;
+
+    @FXML
     void closeClicked(MouseEvent event) {
         App.stageClose();
     }
@@ -69,6 +76,8 @@ public class PrimaryController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        labelNama.setVisible(false);
+        labelNim.setVisible(false);
         makeStageDragable();
         setUserFromProperties();
         setHandlerMenuButton();

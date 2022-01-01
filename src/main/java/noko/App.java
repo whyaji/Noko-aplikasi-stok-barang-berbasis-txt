@@ -15,7 +15,7 @@ import java.util.Properties;
 
 /**
  * @author Wahyu Patriaji
- * @version 1.5.1
+ * @version 2.0.0
  */
 public class App extends Application {
     public static void main(String[] args) {

@@ -7,11 +7,13 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,6 +22,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -84,6 +87,9 @@ public class StoreHouseController implements Initializable {
     @FXML
     private Label kategoriSelected;
 
+    @FXML
+    private ChoiceBox<String> sortChoiceBox;
+
     private List<String> kategoriList = new ArrayList<>();
     private List<Item> items = new ArrayList<>();
     private AppListener appListener;
@@ -94,11 +100,26 @@ public class StoreHouseController implements Initializable {
     static Item choosenItem;
     static boolean editMode;
 
+    private String scope;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        scope = "";
         setBtnHandler();
+        setSortChoiceBox();
         setUpKategori();
-        dynamicGridPane("");
+        dynamicGridPane();
+    }
+
+    private void setSortChoiceBox() {
+        String[] sortList = {"Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama"};
+        sortChoiceBox.getItems().setAll(sortList);
+        sortChoiceBox.setOnAction(this::getSort);
+        sortChoiceBox.getSelectionModel().selectFirst();
+    }
+
+    private void getSort(ActionEvent event){
+        dynamicGridPane();
     }
 
     private void setBtnHandler() {
@@ -127,9 +148,10 @@ public class StoreHouseController implements Initializable {
         kategoriList.clear();
     }
 
-    private void dynamicGridPane(String scope) {
+    private void dynamicGridPane() {
         items.clear();
         items.addAll(getData());
+        sortItems(sortChoiceBox.getValue());
         if (confirmed) {
             setUpAllButtonKategori();
         }
@@ -181,6 +203,78 @@ public class StoreHouseController implements Initializable {
         }
         confirmed = false;
     }
+
+    private void sortItems(String value) {
+        switch (value) {//"Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama"
+            case "Terbaru":
+                sortTerbaru();
+                break;
+            case "Harga Terendah":
+                sortTerendah();
+                break;
+            case "Harga Tertinggi":
+                sortTertinggi();
+                break;
+            case "Nama":
+                sortNama();
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void sortNama() {
+        int n = items.size();
+        for (int i = 0; i < n - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < n; j++) {
+                if (items.get(j).getNama().compareToIgnoreCase(items.get(min).getNama()) < 0) {
+                    min = j;
+                }
+            }
+            
+            Item temp = items.get(min);
+            items.set(min, items.get(i));
+            items.set(i, temp);
+        }
+    }
+
+    private void sortTertinggi() {
+        int n = items.size();
+        for (int i = 0; i < n - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < n; j++) {
+                if (items.get(j).getHarga() > items.get(min).getHarga()) {
+                    min = j;
+                }
+            }
+            
+            Item temp = items.get(min);
+            items.set(min, items.get(i));
+            items.set(i, temp);
+        }
+    }
+
+    private void sortTerendah() {
+        int n = items.size();
+        for (int i = 0; i < n - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < n; j++) {
+                if (items.get(j).getHarga() < items.get(min).getHarga()) {
+                    min = j;
+                }
+            }
+            
+            Item temp = items.get(min);
+            items.set(min, items.get(i));
+            items.set(i, temp);
+        }
+    }
+
+    private void sortTerbaru() {
+        Collections.reverse(items);
+    }
+
 
     private List<Item> getData() {
         List<Item> items = new ArrayList<>();
@@ -244,7 +338,8 @@ public class StoreHouseController implements Initializable {
         GridPane.setMargin(button, new Insets(10));
         button.setOnMouseClicked((event) -> {
             kategoriSelected.setText(newKategori);
-            dynamicGridPane(newKategori);
+            scope = newKategori;
+            dynamicGridPane();
         });
     }
 
@@ -279,7 +374,7 @@ public class StoreHouseController implements Initializable {
 
         if (confirmed) {
             setUpKategori();
-            dynamicGridPane("");
+            dynamicGridPane();
         }
     }
 
@@ -330,14 +425,14 @@ public class StoreHouseController implements Initializable {
         if (confirmed) {
 
             setUpKategori();
-            dynamicGridPane("");
+            dynamicGridPane();
         }
         editMode = false;
     }
 
     private void searchAction() {
-        kategoriSelected.setText("All (search result)");
-        dynamicGridPane(searchTfield.getText());
+        scope = searchTfield.getText();
+        dynamicGridPane();
     }
 
     private void tambahBarang() {
@@ -347,7 +442,7 @@ public class StoreHouseController implements Initializable {
         if (confirmed) {
 
             setUpKategori();
-            dynamicGridPane("");
+            dynamicGridPane();
         }
     }
 

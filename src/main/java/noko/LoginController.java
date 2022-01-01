@@ -1,7 +1,6 @@
 package noko;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -83,6 +82,9 @@ public class LoginController implements Initializable{
     @FXML
     private HBox passHbox;
 
+    @FXML
+    private HBox namaNimBox;
+
     static Stage popup;
     static boolean showPass;
     private boolean normalTField;
@@ -93,12 +95,13 @@ public class LoginController implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        namaNimBox.setVisible(false);
         normalTField = true;
+        setVersionApp();
         makeStageDragable();
         setToggleShowHidden();
         setPassField();
         setListenerPass();
-        setVersionApp();
         loginBtn.setDisable(true);
         errorLoginLbl.setVisible(false);
     }
@@ -329,7 +332,7 @@ public class LoginController implements Initializable{
     private void setVersionApp(){
         try {
             Properties properties = new Properties();
-            properties.load(new FileInputStream("version.properties"));
+            properties.load(App.class.getResourceAsStream("version/version.properties"));
             versionLbl.setText("v" + properties.getProperty("name.version"));
         } catch (Exception e) {
         }
