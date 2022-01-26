@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" stylesheets="@value/style.css" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="noko.ConfirmPassController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" stylesheets="@value/style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="noko.ConfirmPassController">
    <children>
       <HBox fx:id="topBar" alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="600.0" styleClass="top-bar-menu" stylesheets="@value/style.css">
          <children>
@@ -25,7 +25,7 @@
                </font>
             </Label>
             <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="closeBtn" focusTraversable="false" mnemonicParsing="false" styleClass="button-close-reg" stylesheets="@value/style.css" text="✖">
+            <Button fx:id="closeBtn" focusTraversable="false" mnemonicParsing="false" prefHeight="46.0" prefWidth="74.0" styleClass="button-close-reg" stylesheets="@value/style.css" text="✖">
                <font>
                   <Font name="SansSerif Bold" size="19.0" />
                </font>

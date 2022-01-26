@@ -15,7 +15,7 @@ import java.util.Properties;
 
 /**
  * @author Wahyu Patriaji
- * @version 2.0.0
+ * @version 2.5.0
  */
 public class App extends Application {
     public static void main(String[] args) {
@@ -60,16 +60,16 @@ public class App extends Application {
         stage.centerOnScreen();
     }
 
-    static void stageClose(){
+    static void stageClose() {
         stage.close();
         System.exit(0);
     }
 
-    static void appMinimize(){
+    static void appMinimize() {
         stage.setIconified(true);
     }
 
-    static void appMaximized(){
+    static void appMaximized() {
         if (stage.isMaximized()) {
             stage.setMaximized(false);
         } else {
@@ -77,7 +77,7 @@ public class App extends Application {
         }
     }
 
-    static boolean isAppMaximized(){
+    static boolean isAppMaximized() {
         return stage.isMaximized();
     }
 
@@ -109,7 +109,7 @@ public class App extends Application {
         }
     }
 
-    static void closePopup(){
+    static void closePopup() {
         popup.close();
     }
 }

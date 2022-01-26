@@ -115,7 +115,7 @@ public class MarketController implements Initializable {
     static Item choosenItem;
 
     private AppListener appListener;
-    private String scope;
+    private String scope, kategoriScope;
 
     private List<Item> items = new ArrayList<>();
 
@@ -136,13 +136,13 @@ public class MarketController implements Initializable {
     }
 
     private void setSortChoiceBox() {
-        String[] sortList = {"Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama"};
+        String[] sortList = { "Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama" };
         sortChoiceBox.getItems().setAll(sortList);
         sortChoiceBox.setOnAction(this::getSort);
         sortChoiceBox.getSelectionModel().selectFirst();
     }
 
-    private void getSort(ActionEvent event){
+    private void getSort(ActionEvent event) {
         dynamicGridPane();
     }
 
@@ -154,6 +154,8 @@ public class MarketController implements Initializable {
     }
 
     private void setUpKategori() {
+        kategoriScope = "All";
+        kategoriSelected.setText(kategoriScope);
         confirmed = true;
         gridPaneKategori.getChildren().clear();
         kategoriList.clear();
@@ -209,7 +211,7 @@ public class MarketController implements Initializable {
                         jumlahTfield.setEditable(false);
                         jumlahTfield.setText("0");
                     }
-                } 
+                }
             }
         });
         plusBtn.setOnMouseClicked((event) -> {
@@ -243,11 +245,7 @@ public class MarketController implements Initializable {
         }
         if (items.size() > 0) {
             selectedItemDisplay(true);
-            if(choosenItem != null) {
-                setChoosenItem(choosenItem);
-            } else {
-                setChoosenItem(items.get(0));
-            }
+            setChoosenItem(items.get(0));
             appListener = new AppListener() {
                 @Override
                 public void onClickListener(Item item) {
@@ -267,26 +265,16 @@ public class MarketController implements Initializable {
                         items.get(i).setJumlah(items.get(i).getJumlah() - itemCart.getBanyak());
                     }
                 }
-                if (!scope.equals("")) {
-                    if (!scope.equals("All")) {
-                        boolean containInName = items.get(i).getNama().toLowerCase().contains(scope.toLowerCase());
-                        boolean containInKategori = items.get(i).getKategori().toLowerCase()
-                                .contains(scope.toLowerCase());
-                        if (!containInName && !containInKategori) {
-                            continue;
-                        }
-                    }
-                }
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(App.class.getResource("item.fxml"));
 
                 AnchorPane anchorPane = fxmlLoader.load();
                 anchorPane.setStyle("-fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.1), 10.0, 0.0, 0.0, 10.0);");
-    
+
                 ItemController itemController = fxmlLoader.getController();
                 itemController.setData(items.get(i), appListener);
-    
+
                 if (column == 3) {
                     column = 0;
                     row++;
@@ -301,7 +289,7 @@ public class MarketController implements Initializable {
     }
 
     private void sortItems(String value) {
-        switch (value) {//"Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama"
+        switch (value) {// "Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama"
             case "Terbaru":
                 sortTerbaru();
                 break;
@@ -328,7 +316,7 @@ public class MarketController implements Initializable {
                     min = j;
                 }
             }
-            
+
             Item temp = items.get(min);
             items.set(min, items.get(i));
             items.set(i, temp);
@@ -344,7 +332,7 @@ public class MarketController implements Initializable {
                     min = j;
                 }
             }
-            
+
             Item temp = items.get(min);
             items.set(min, items.get(i));
             items.set(i, temp);
@@ -360,7 +348,7 @@ public class MarketController implements Initializable {
                     min = j;
                 }
             }
-            
+
             Item temp = items.get(min);
             items.set(min, items.get(i));
             items.set(i, temp);
@@ -371,7 +359,7 @@ public class MarketController implements Initializable {
         Collections.reverse(items);
     }
 
-    private List<Item> getData(){
+    private List<Item> getData() {
         List<Item> items = new ArrayList<>();
         Item item;
 
@@ -395,12 +383,19 @@ public class MarketController implements Initializable {
                 item.setImage(stringTokenizer.nextToken());
                 itemData = bufferedReader.readLine();
                 if (uuidUser.equals(PrimaryController.account.getUuid())) {
-                    items.add(item);
                     if (confirmed) {
                         if (kategoriList.isEmpty()) {
                             kategoriList.add("All");
                         }
                         kategoriList.add(item.getKategori());
+                    }
+
+                    boolean containInName = item.getNama().toLowerCase().contains(scope.toLowerCase());
+                    boolean containInKategori = kategoriScope.equals("All")
+                            || item.getKategori().toLowerCase().contains(kategoriScope.toLowerCase());
+
+                    if ((containInKategori && containInName) || (scope.equals("") && kategoriScope.equals("All"))) {
+                        items.add(item);
                     }
                 }
             }
@@ -523,7 +518,7 @@ public class MarketController implements Initializable {
             if (item.getJumlah() > 0) {
                 jumlahTfield.setEditable(true);
                 jumlahTfield.setText("1");
-            } else if (item.getJumlah() == 0){
+            } else if (item.getJumlah() == 0) {
                 jumlahTfield.setEditable(false);
                 jumlahTfield.setText("0");
             }
@@ -540,7 +535,7 @@ public class MarketController implements Initializable {
         try {
             Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("cart.fxml")));
             Scene scene = new Scene(root);
-        
+
             popup = new Stage();
             popup.setResizable(false);
             popup.initOwner(App.stage);
@@ -553,7 +548,7 @@ public class MarketController implements Initializable {
         }
     }
 
-    static void closePopup(){
+    static void closePopup() {
         popup.close();
     }
 
@@ -568,10 +563,10 @@ public class MarketController implements Initializable {
         return total;
     }
 
-    private void setUpAllButtonKategori(){
+    private void setUpAllButtonKategori() {
         List<String> kategoriListTemp = new ArrayList<>();
-        for(int i=0; i < kategoriList.size(); i++){
-            if( !kategoriListTemp.contains(kategoriList.get(i)) ){
+        for (int i = 0; i < kategoriList.size(); i++) {
+            if (!kategoriListTemp.contains(kategoriList.get(i))) {
                 kategoriListTemp.add(kategoriList.get(i));
                 addButtonKategori(kategoriList.get(i), kategoriListTemp.size());
             }
@@ -589,13 +584,12 @@ public class MarketController implements Initializable {
         GridPane.setMargin(button, new Insets(10));
         button.setOnMouseClicked((event) -> {
             kategoriSelected.setText(newKategori);
-            scope = newKategori;
+            kategoriScope = newKategori;
             dynamicGridPane();
         });
     }
-    
+
     private void searchAction() {
-        kategoriSelected.setText("All (search result)");
         scope = searchTfield.getText();
         dynamicGridPane();
     }

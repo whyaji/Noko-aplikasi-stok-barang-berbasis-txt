@@ -100,7 +100,7 @@ public class StoreHouseController implements Initializable {
     static Item choosenItem;
     static boolean editMode;
 
-    private String scope;
+    private String scope, kategoriScope;
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -112,13 +112,13 @@ public class StoreHouseController implements Initializable {
     }
 
     private void setSortChoiceBox() {
-        String[] sortList = {"Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama"};
+        String[] sortList = { "Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama" };
         sortChoiceBox.getItems().setAll(sortList);
         sortChoiceBox.setOnAction(this::getSort);
         sortChoiceBox.getSelectionModel().selectFirst();
     }
 
-    private void getSort(ActionEvent event){
+    private void getSort(ActionEvent event) {
         dynamicGridPane();
     }
 
@@ -144,6 +144,8 @@ public class StoreHouseController implements Initializable {
 
     private void setUpKategori() {
         confirmed = true;
+        kategoriScope = "All";
+        kategoriSelected.setText(kategoriScope);
         gridPaneKategori.getChildren().clear();
         kategoriList.clear();
     }
@@ -174,16 +176,7 @@ public class StoreHouseController implements Initializable {
             for (int i = 0; i < items.size(); i++) {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(App.class.getResource("item.fxml"));
-                if (!scope.equals("")) {
-                    if (!scope.equals("All")) {
-                        boolean containInName = items.get(i).getNama().toLowerCase().contains(scope.toLowerCase());
-                        boolean containInKategori = items.get(i).getKategori().toLowerCase()
-                                .contains(scope.toLowerCase());
-                        if (!containInName && !containInKategori) {
-                            continue;
-                        }
-                    }
-                }
+
                 AnchorPane anchorPane = fxmlLoader.load();
                 anchorPane.setStyle("-fx-effect: dropShadow(three-pass-box, rgba(0,0,0,0.1), 10.0, 0.0, 0.0, 10.0);");
 
@@ -205,7 +198,7 @@ public class StoreHouseController implements Initializable {
     }
 
     private void sortItems(String value) {
-        switch (value) {//"Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama"
+        switch (value) {// "Terbaru", "Harga Terendah", "Harga Tertinggi", "Nama"
             case "Terbaru":
                 sortTerbaru();
                 break;
@@ -232,7 +225,7 @@ public class StoreHouseController implements Initializable {
                     min = j;
                 }
             }
-            
+
             Item temp = items.get(min);
             items.set(min, items.get(i));
             items.set(i, temp);
@@ -248,7 +241,7 @@ public class StoreHouseController implements Initializable {
                     min = j;
                 }
             }
-            
+
             Item temp = items.get(min);
             items.set(min, items.get(i));
             items.set(i, temp);
@@ -264,7 +257,7 @@ public class StoreHouseController implements Initializable {
                     min = j;
                 }
             }
-            
+
             Item temp = items.get(min);
             items.set(min, items.get(i));
             items.set(i, temp);
@@ -274,7 +267,6 @@ public class StoreHouseController implements Initializable {
     private void sortTerbaru() {
         Collections.reverse(items);
     }
-
 
     private List<Item> getData() {
         List<Item> items = new ArrayList<>();
@@ -300,12 +292,19 @@ public class StoreHouseController implements Initializable {
                 item.setImage(stringTokenizer.nextToken());
                 itemData = bufferedReader.readLine();
                 if (uuidUser.equals(PrimaryController.account.getUuid())) {
-                    items.add(item);
                     if (confirmed) {
                         if (kategoriList.isEmpty()) {
                             kategoriList.add("All");
                         }
                         kategoriList.add(item.getKategori());
+                    }
+
+                    boolean containInName = item.getNama().toLowerCase().contains(scope.toLowerCase());
+                    boolean containInKategori = kategoriScope.equals("All")
+                            || item.getKategori().toLowerCase().contains(kategoriScope.toLowerCase());
+
+                    if ((containInKategori && containInName) || (scope.equals("") && kategoriScope.equals("All"))) {
+                        items.add(item);
                     }
                 }
             }
@@ -338,7 +337,7 @@ public class StoreHouseController implements Initializable {
         GridPane.setMargin(button, new Insets(10));
         button.setOnMouseClicked((event) -> {
             kategoriSelected.setText(newKategori);
-            scope = newKategori;
+            kategoriScope = newKategori;
             dynamicGridPane();
         });
     }
